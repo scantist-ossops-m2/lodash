@@ -22043,6 +22043,14 @@
       }
     });
 
+    QUnit.test('should forbid code injection through the "variable" options', function(assert) {
+      assert.expect(1);
+
+      assert.raises(function () {
+        _.template('', { 'variable': '){console.log(process.env)}; with(obj' });
+      });
+    });
+
     QUnit.test('should support custom delimiters', function(assert) {
       assert.expect(2);
 
